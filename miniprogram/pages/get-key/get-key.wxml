@@ -1,0 +1,146 @@
+<view class="page-container">
+
+    <view class="main-content">
+
+        <view class="header-section">
+            <view class="header-icon">
+                <view class="icon-wrapper">
+                    <image src="/images/cdk.svg" ></image>
+                </view>
+            </view>
+            <view class="header-text">
+                <text class="main-title">CDK查询</text>
+            </view>
+        </view>
+
+
+        <view class="query-card">
+            <view class="card-header">
+                <text class="card-title">订单号查询</text>
+            </view>
+
+
+            <view class="input-section">
+                <t-input
+                        model:value="{{orderId}}"
+                        placeholder="请输入订单号"
+                        maxlength="{{50}}"
+                        prefixIcon="package"
+                        clearable
+                        class="modern-input-tdesign"
+                        bind:change="onOrderNumberInput"
+                />
+
+
+                <t-button
+                        theme="primary"
+                        size="large"
+                        loading="{{loading}}"
+                        disabled="{{loading}}"
+                        bind:tap="doQueryCDK"
+                        class="query-button"
+                        block
+                >
+                    <t-icon name="search" size="32rpx" slot="prefixIcon" wx:if="{{!loading}}"/>
+                    {{loading ? '查询中...' : '查询CDK'}}
+                </t-button>
+            </view>
+        </view>
+
+
+        <view class="tips-card-tdesign">
+            <view class="tips-header">
+                <t-icon name="info-circle" size="32rpx" color="#667eea"/>
+                <text class="tips-title">订单号提示</text>
+            </view>
+            <t-divider/>
+            <t-cell-group>
+                <t-cell title="微信-米诺斯工作室" description="商户单号（WeN开头）"/>
+                <t-cell title="微信-云卬数据" description="商品号（客服QQ前面的部分）"/>
+                <t-cell title="支付宝-云卬数据" description="商家订单号（条码，点击后可复制）"/>
+                <t-cell title="爱发电" description="订单号"/>
+            </t-cell-group>
+        </view>
+    </view>
+
+
+    <t-popup
+            visible="{{showSuccessModal}}"
+            placement="center"
+            bind:visible-change="onPopupVisibleChange"
+            close-on-overlay-click="{{true}}"
+            class="beautiful-popup"
+    >
+        <view class="modern-popup-content">
+
+            <view class="success-icon-area">
+                <view class="success-circle">
+                    <t-icon name="check" size="60rpx" color="#ffffff"/>
+                </view>
+                <view class="success-animation"></view>
+            </view>
+
+
+            <view class="popup-title-section">
+                <text class="popup-main-title">🎉 感谢赞助</text>
+            </view>
+
+
+            <view class="cdk-showcase">
+                <view class="cdk-code-container">
+                    <view class="cdk-code-box">
+                        <text class="cdk-code-display">{{cdkResult.cdk}}</text>
+                        <view class="code-decoration"></view>
+                    </view>
+                    <t-button
+                            theme="primary"
+                            size="medium"
+                            data-cdk="{{cdkResult.cdk}}"
+                            bind:tap="copyCDK"
+                            class="modern-copy-btn"
+
+                    >
+                        <t-icon name="file-copy" size="24rpx" slot="prefixIcon"/>
+                        复制CDK
+                    </t-button>
+                </view>
+            </view>
+
+
+            <view  class="time-info-section">
+                <view class="info-card">
+                    <view class="info-item">
+                        <view class="info-icon-wrapper expire-time">
+                            <t-icon name="time" size="24rpx" color="#667eea"/>
+                        </view>
+                        <view class="info-content">
+                            <text class="info-label">过期时间</text>
+                            <text class="info-value">{{ cdkResult.expiredFormatStr }}</text>
+                        </view>
+                    </view>
+
+                    <view class="info-divider"></view>
+
+                    <view class="info-item">
+                        <view class="info-icon-wrapper remaining-time">
+                            <t-icon name="hourglass" size="24rpx"
+                                    color="{{cdkResult.status === 'expired' ? '#e34d59' : '#00a870'}}"/>
+                        </view>
+                        <view class="info-content">
+                            <text class="info-label">剩余时间</text>
+                            <view class="status-badge {{cdkResult.status === 'expired' ? 'expired' : 'valid'}}">
+                                <text class="status-text">{{cdkResult.remainingFormatStr}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+
+
+            <view class="popup-close-btn" bind:tap="closeSuccessModal">
+                <t-icon name="close" size="32rpx" color="#999999"/>
+            </view>
+        </view>
+    </t-popup>
+</view>

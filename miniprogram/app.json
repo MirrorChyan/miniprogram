@@ -1,0 +1,39 @@
+{
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-divider": "tdesign-miniprogram/divider/divider",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
+  },
+  "pages": [
+    "pages/index/index",
+    "pages/get-key/get-key"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "Mirror酱",
+    "navigationBarBackgroundColor": "#667eea"
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "requiredBackgroundModes": [
+    "audio",
+    "location"
+  ],
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}

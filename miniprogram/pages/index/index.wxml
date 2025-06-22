@@ -1,0 +1,176 @@
+<view class="container">
+
+
+    <view class="header-section">
+        <view class="avatar-wrapper">
+            <image class="avatar" src="https://mirrorchyan.com/api/misc/static/mirrorc/avatar-256.png"
+                   mode="aspectFill"></image>
+        </view>
+        <view class="title-wrapper">
+            <text class="main-title">Mirror酱</text>
+        </view>
+    </view>
+
+
+    <view class="cards-section">
+
+        <view class="function-card" bindtap="onFetchCdkList">
+            <view class="card-icon-wrapper">
+                <view class="card-icon">
+                    <image src="/images/order.svg"></image>
+                </view>
+            </view>
+            <view class="card-content">
+                <text class="card-title">快捷查询</text>
+                <text class="card-desc">仅支持微信订单</text>
+            </view>
+            <view class="card-arrow">➔</view>
+        </view>
+
+
+        <view class="function-card" bindtap="onQueryCDK">
+            <view class="card-icon-wrapper">
+                <view class="card-icon">
+                    <image src="/images/cdk.svg"></image>
+                </view>
+            </view>
+            <view class="card-content">
+                <text class="card-title">CDK查询</text>
+                <text class="card-desc">通过订单号查询CDK</text>
+            </view>
+            <view class="card-arrow">➔</view>
+        </view>
+
+
+        <view class="function-card" bindtap="onFeedback">
+            <view class="card-icon-wrapper">
+                <view class="card-icon">
+                    <image src="/images/feedback.svg"></image>
+                </view>
+            </view>
+            <view class="card-content">
+                <text class="card-title">问题反馈</text>
+                <text class="card-desc">加入QQ群获取帮助</text>
+            </view>
+            <view class="card-arrow">➔</view>
+        </view>
+    </view>
+
+
+    <t-popup
+            visible="{{showOrderList}}"
+            placement="center"
+            bind:visible-change="onOrderListVisibleChange"
+            close-on-overlay-click="{{true}}"
+            class="order-popup-tdesign"
+    >
+        <view class="modern-order-popup">
+
+            <view class="order-popup-header">
+                <view class="header-icon-area">
+                    <t-icon name="layers" size="48rpx"/>
+                </view>
+                <text class="order-popup-title">我的CDK</text>
+                <view class="order-close-btn" bind:tap="closeOrderList">
+                    <t-icon name="close" size="32rpx"/>
+                </view>
+            </view>
+
+
+            <view class="order-popup-body">
+                <view wx:if="{{orderList.length === 0}}" class="empty-state">
+                    <view class="empty-icon">
+                        <t-icon name="inbox" size="120rpx" color="#cccccc"/>
+                    </view>
+                    <text class="empty-title">暂无订单</text>
+                    <text class="empty-desc">您还没有任何CDK~</text>
+                </view>
+                <scroll-view wx:else class="order-list-scroll" scroll-y="{{true}}" enhanced="{{true}}"
+                             enable-flex="{{true}}" scroll-with-animation="{{true}}">
+                    <view class="order-list-tdesign">
+                        <view wx:for="{{orderList}}" wx:key="cdk" class="order-card">
+
+                            <view class="order-card-header">
+                                <view class="cdk-info">
+                                    <view class="cdk-display-row">
+                                        <text class="cdk-code">{{item.cdk}}</text>
+                                    </view>
+                                    <view class="cdk-display-row">
+                                        过期时间: {{ item.expiredFormatStr }}
+                                    </view>
+                                    <t-button
+                                            theme="primary"
+                                            size="extra-small"
+                                            data-cdk="{{item.cdk}}"
+                                            bind:tap="copyCDK"
+                                            class="copy-btn-tdesign"
+                                    >
+                                        <t-icon name="file-copy" size="20rpx" slot="prefixIcon"/>
+                                        复制
+                                    </t-button>
+                                </view>
+                            </view>
+
+
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </t-popup>
+
+    <t-popup
+            visible="{{showFeedback}}"
+            placement="center"
+            bind:visible-change="onFeedbackVisibleChange"
+            close-on-overlay-click="{{true}}"
+            class="feedback-popup-tdesign"
+    >
+        <view class="modern-feedback-popup">
+
+            <view class="feedback-popup-header">
+                <view class="feedback-icon-area">
+                    <t-icon name="chat" size="48rpx" color="#ffffff"/>
+                </view>
+                <text class="feedback-popup-title">问题反馈</text>
+                <view class="feedback-close-btn" bind:tap="closeFeedback">
+                    <t-icon name="close" size="32rpx" color="#ffffff"/>
+                </view>
+            </view>
+
+
+            <view class="feedback-popup-body">
+                <view class="feedback-intro">
+                    <view class="intro-icon">
+                        <t-icon name="service" size="80rpx" color="#667eea"/>
+                    </view>
+                    <text class="intro-desc">如遇问题，欢迎加入QQ群反馈</text>
+                </view>
+
+                <view class="qq-info-card">
+                    <view class="qq-header">
+                        <t-icon name="logo-qq" size="32rpx" color="#12b7f5"/>
+                        <text class="qq-title">QQ交流群</text>
+                    </view>
+                    <t-divider/>
+                    <view class="qq-content">
+                        <view class="qq-number-display">
+                            <text class="qq-number-text">{{qqGroupNumber}}</text>
+                        </view>
+                        <t-button
+                                theme="primary"
+                                size="medium"
+                                bind:tap="copyQQ"
+                                class="copy-qq-btn"
+
+                                block
+                        >
+                            <t-icon name="file-copy" size="24rpx" slot="prefixIcon"/>
+                            复制
+                        </t-button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </t-popup>
+</view>
