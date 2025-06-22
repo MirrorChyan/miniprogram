@@ -26,7 +26,6 @@ Component({
 
   lifetimes: {
     attached() {
-
       this.getOpenId()
     }
   },
@@ -61,7 +60,7 @@ Component({
         const resp = await getWechatOrderList(this.data.openid)
         console.log(resp)
         if (resp.data) {
-          const processedOrders = this.processOrderList(resp.data);
+          const processedOrders = this.processOrderList(resp.data.data);
           this.setData({
             orderList: processedOrders,
             showOrderList: true
@@ -76,6 +75,7 @@ Component({
           })
         }
       } catch (error) {
+        console.log(error)
         await wx.hideLoading()
         await wx.showToast({
           title: '网络错误，请重试',
@@ -84,13 +84,29 @@ Component({
       }
     },
 
-    processOrderList(orders: { cdk: string; expiredTime: number }[]): OrderItem[] {
+    processOrderList(orders: any[]): OrderItem[] {
+      console.log(orders)
+      if (!orders) {
+        return []
+      }
       const now = Date.now();
-      return orders.map(order => {
-        const expiredTs = new Date(order.expiredTime).valueOf();
+      const m: any = {}
+      const val = orders.sort((a, b) => {
+        return new Date(b['created_at']).valueOf() - new Date(a['created_at']).valueOf()
+      }).filter(e => {
+        if (m[e['cdk']]) {
+          return false
+        }
+        m[e['cdk']] = true
+        return true
+      })
+      return val.map(order => {
+        const expiredTime = new Date(order.expired_at);
+        const expiredTs = expiredTime.valueOf();
         const isExpired = expiredTs < now;
         return {
-          ...order,
+          cdk: order.cdk,
+          expiredTime: expiredTime.valueOf(),
           status: isExpired ? 'expired' : 'valid',
           expiredFormatStr: formatDate(expiredTs)
         };

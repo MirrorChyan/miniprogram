@@ -10,55 +10,10 @@ export async function getOpenId(code: string) {
 
 export async function getWechatOrderList(openId: string) {
   console.log('getWechatOrderList', openId)
-  const now = new Date().getTime();
-  const list = [
-    {
-      cdk: "0badf00d0c3b372c5b8757dc3",
-      expiredTime: now + 30 * 24 * 60 * 60 * 1000,
-    },
-    {
-      cdk: "0badf00d0c3b372c5b8757dc3",
-      expiredTime: now + 60 * 60 * 1000,
-    },
-    {
-      cdk: "0badf00d0c3b372c5b8757dc3",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    },
-    {
-      cdk: "0badf00d0c3b372c5b8757dc3",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    }, {
-      cdk: "0badf00d0c3b372c5b8757dc3",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    }, {
-      cdk: "0badf00d0c3b372c5b8757dc",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    }, {
-      cdk: "0badf00d0c3b372c5b8757dc",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    }, {
-      cdk: "0badf00d0c3b372c5b8757dc",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    }, {
-      cdk: "0badf00d0c3b372c5b8757dc",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    }, {
-      cdk: "0badf00d0c3b372c5b8757dc",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    }, {
-      cdk: "0badf00d0c3b372c5b8757dc",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    }, {
-      cdk: "0badf00d0c3b372c5b8757dc",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    }, {
-      cdk: "0badf00d0c3b372c5b8757dc",
-      expiredTime: now - 24 * 60 * 60 * 1000,
-    },
-  ]
-  return {
-    data: list,
-  }
+  return await request({
+    url: `${API_BASE_URL}/billing/order/query_by_user?platform=weixin&user_id=${openId}`,
+    method: 'GET',
+  })
 }
 
 export async function queryCdkByOrderId(orderId: string) {

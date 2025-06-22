@@ -1,4 +1,3 @@
-
 page {
     background: #f7f8fa;
     min-height: 100vh;
@@ -317,6 +316,16 @@ page {
     box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
 }
 
+/* 过期订单卡片样式 */
+.order-card-expired {
+    opacity: 0.8;
+    background: #f5f5f5;
+}
+
+.order-card-expired .order-card-header {
+    background: #fafafa;
+}
+
 .order-card-header {
     background: #ffffff;
     padding: 24rpx;
@@ -350,6 +359,11 @@ page {
     padding: 20rpx;
 }
 
+/* 过期CDK展示行样式 */
+.cdk-display-row-expired {
+    background: #f8f8f8;
+}
+
 .cdk-code {
     flex: 1;
     font-size: 28rpx;
@@ -358,6 +372,39 @@ page {
     font-weight: 700;
     word-break: break-all;
     line-height: 1.4;
+}
+
+/* 过期CDK样式 */
+.cdk-code-expired {
+    color: #999999;
+    text-decoration: line-through;
+}
+
+/* 过期时间文本样式 */
+.cdk-time-expired {
+    color: #999999;
+    font-size: 26rpx;
+}
+
+/* 状态标签样式 */
+.cdk-status-badge {
+    padding: 8rpx 16rpx;
+    border-radius: 8rpx;
+    font-size: 24rpx;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* 有效状态标签 */
+.status-valid {
+    background: #e3f2e6;
+    color: #00a870;
+}
+
+/* 过期状态标签 */
+.status-expired {
+    background: #ffebe6;
+    color: #ff4d4f;
 }
 
 .copy-btn-tdesign {
