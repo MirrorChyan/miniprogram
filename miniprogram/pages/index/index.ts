@@ -36,8 +36,8 @@ Component({
         const result = await wx.login()
         if (result.code) {
           const resp = await getOpenId(result.code);
-          if (resp.data.openid) {
-            this.setData({openid: resp.data.openid})
+          if (resp.data?.data?.openid) {
+            this.setData({openid: resp.data.data.openid})
             return true
           }
         }
