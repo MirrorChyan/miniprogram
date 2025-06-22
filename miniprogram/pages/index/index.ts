@@ -6,7 +6,7 @@ interface OrderItem {
   cdk: string;
   expiredTime: number;
   expiredFormatStr: string;
-  status?: 'expired' | 'valid';
+  status?: 'expired' | 'valid' | 'transferred';
 }
 
 Component({
@@ -101,13 +101,18 @@ Component({
         return true
       })
       return val.map(order => {
-        const expiredTime = new Date(order.expired_at);
+        const expiredTime = new Date(order['expired_at']);
         const expiredTs = expiredTime.valueOf();
         const isExpired = expiredTs < now;
+        console.log(order)
+        let status: 'expired' | 'valid' | 'transferred' = 'valid'
+        if (isExpired) {
+          status = order['transferred'] === -1 ? 'transferred' : 'expired'
+        }
         return {
           cdk: order.cdk,
           expiredTime: expiredTime.valueOf(),
-          status: isExpired ? 'expired' : 'valid',
+          status: status,
           expiredFormatStr: formatDate(expiredTs)
         };
       });

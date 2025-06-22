@@ -377,7 +377,6 @@ page {
 /* 过期CDK样式 */
 .cdk-code-expired {
     color: #999999;
-    text-decoration: line-through;
 }
 
 /* 过期时间文本样式 */

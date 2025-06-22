@@ -95,23 +95,23 @@
 
                             <view class="order-card-header">
                                 <view class="cdk-info">
-                                    <view class="cdk-display-row {{item.status === 'expired' ? 'cdk-display-row-expired' : ''}}">
-                                        <text class="cdk-code {{item.status === 'expired' ? 'cdk-code-expired' : ''}}">{{item.cdk}}</text>
-                                        <view class="cdk-status-badge {{item.status === 'expired' ? 'status-expired' : 'status-valid'}}">
-                                            {{item.status === 'expired' ? '已过期' : '有效'}}
+                                    <view class="cdk-display-row {{item.status ==='valid'?'':'cdk-display-row-expired'}}">
+                                        <text class="cdk-code {{item.status ==='valid'?'':'cdk-code-expired'}}">{{item.cdk}}</text>
+                                        <view class="cdk-status-badge {{item.status ==='valid'?'status-valid':'status-expired'}}">
+                                            {{item.status === 'valid' ? '有效' : (item.status === 'transferred' ? '已被转移' : '已过期')}}
                                         </view>
                                     </view>
-                                    <view class="cdk-display-row {{item.status === 'expired' ? 'cdk-display-row-expired' : ''}}">
-                                        <text class="{{item.status === 'expired' ? 'cdk-time-expired' : ''}}">
-                                            过期时间: {{ item.expiredFormatStr }}</text>
+                                    <view class="cdk-display-row {{item.status!=='expired'?'':'cdk-display-row-expired'}}">
+                                        <text class="{{item.status === 'valid' ? '' : 'cdk-time-expired'}}">
+                                            {{ (item.status === 'transferred' ? '转移时间：' : '过期时间：') + item.expiredFormatStr }}
+                                        </text>
                                     </view>
                                     <t-button
-                                            theme="{{item.status === 'expired' ? 'default' : 'primary'}}"
+                                            theme="{{item.status === 'valid' ? 'primary' : 'default'}}"
                                             size="extra-small"
                                             data-cdk="{{item.cdk}}"
                                             bind:tap="copyCDK"
                                             class="copy-btn-tdesign"
-                                            disabled="{{item.status === 'expired'}}"
                                     >
                                         <t-icon name="file-copy" size="20rpx" slot="prefixIcon"/>
                                         复制
