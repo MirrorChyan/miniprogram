@@ -102,9 +102,9 @@
                                         </view>
                                     </view>
                                     <view class="cdk-display-row {{item.status!=='expired'?'':'cdk-display-row-expired'}}">
-                                        <text class="{{item.status === 'valid' ? '' : 'cdk-time-expired'}}">
+                                        <view class="{{item.status === 'valid' ? '' : 'cdk-time-expired'}}">
                                             {{ (item.status === 'transferred' ? '转移时间：' : '过期时间：') + item.expiredFormatStr }}
-                                        </text>
+                                        </view>
                                     </view>
                                     <t-button
                                             theme="{{item.status === 'valid' ? 'primary' : 'default'}}"
