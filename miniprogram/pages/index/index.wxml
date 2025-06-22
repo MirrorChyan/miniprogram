@@ -17,11 +17,11 @@
         <view class="function-card" bindtap="onFetchCdkList">
             <view class="card-icon-wrapper">
                 <view class="card-icon">
-                    <image src="/images/order.svg"></image>
+                    <image src="/images/cdk.svg"></image>
                 </view>
             </view>
             <view class="card-content">
-                <text class="card-title">快捷查询</text>
+                <text class="card-title">CDK查询</text>
                 <text class="card-desc">仅支持微信订单</text>
             </view>
             <view class="card-arrow">➔</view>
@@ -31,11 +31,11 @@
         <view class="function-card" bindtap="onQueryCDK">
             <view class="card-icon-wrapper">
                 <view class="card-icon">
-                    <image src="/images/cdk.svg"></image>
+                    <image src="/images/order.svg"></image>
                 </view>
             </view>
             <view class="card-content">
-                <text class="card-title">CDK查询</text>
+                <text class="card-title">更多查询</text>
                 <text class="card-desc">通过订单号查询CDK</text>
             </view>
             <view class="card-arrow">➔</view>
