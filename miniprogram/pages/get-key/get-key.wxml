@@ -58,7 +58,7 @@
                 <t-cell title="微信-米诺斯工作室" description="商户单号（WeN开头）"/>
                 <t-cell title="微信-云卬数据" description="商品号（客服QQ前面的部分）"/>
                 <t-cell title="支付宝-米诺斯工作室" description="商家订单号（ALN开头）"/>
-                <t-cell title="支付宝-云卬数据" description="商品号（客服QQ前面的部分）"/>
+                <t-cell title="支付宝-云卬数据" description="商品说明号（客服QQ前面的部分）"/>
                 <t-cell title="爱发电" description="订单号"/>
             </t-cell-group>
         </view>
