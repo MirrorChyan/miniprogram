@@ -1,5 +1,5 @@
 import {CONTACT, ROUTES} from '../../config/config'
-import {getOpenId, getWechatOrderList} from "../../api/api";
+import {getContactInfo, getOpenId, getWechatOrderList} from "../../api/api";
 import {formatDate} from "../../utils/misc";
 
 interface OrderItem {
@@ -142,7 +142,14 @@ Component({
       this.setData({showGetKey: false})
     },
 
-    onFeedback() {
+    async onFeedback() {
+      try {
+        const {data} = await getContactInfo()
+        const qq = data.data.QQGroup
+        this.setData({qqGroupNumber: qq})
+      } catch (e) {
+        console.log(e)
+      }
       this.setData({showFeedback: true})
     },
 

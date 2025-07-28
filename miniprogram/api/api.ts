@@ -22,3 +22,10 @@ export async function queryCdkByOrderId(orderId: string) {
     method: 'GET',
   })
 }
+
+export async function getContactInfo() {
+  return await request({
+    url: `${API_BASE_URL}/misc/contact_us`,
+    method: 'GET',
+  })
+}
